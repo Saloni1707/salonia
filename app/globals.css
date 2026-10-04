@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f6f4f0;
+  --foreground: #2a2826;
+  --muted: #8a847c;
+  --line: #ddd7ce;
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --background: #151412;   /* warm near-black, easier on the eyes than pure black */
+  --foreground: #e8e3da;   /* soft off-white, not glaring */
+  --muted: #9a948a;
+  --line: #34312d;
+  color-scheme: dark;      /* makes scrollbars, file inputs and form controls dark too */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --font-sans: var(--font-sans-src);
+  --font-serif: var(--font-serif-src);
+}
+
+@layer base {
+  * { border-color: var(--line); }
+  input, textarea, button { color: inherit; }   /* form text follows the theme */
+  ::placeholder { color: var(--muted); opacity: 1; }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+::selection { background: #e3d9c8; color: #2a2826; }
+:root[data-theme="dark"] ::selection { background: #4a4234; color: #f2ece1; }
+
+/* the toggle shows the name of the mode you'd switch TO */
+:root[data-theme="dark"] .when-light { display: none; }
+:root:not([data-theme="dark"]) .when-dark { display: none; }
